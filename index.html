@@ -10,22 +10,16 @@
   <style>
     :root {
       --paper: #f5f2e9;
-      --paper-soft: rgba(245, 242, 233, 0.9);
+      --paper-soft: rgba(245,242,233,0.90);
       --ink: #111;
-      --muted: rgba(0, 0, 0, 0.65);
-      --line: rgba(0, 0, 0, 0.16);
-      --radius: 22px;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-      --page-width: 1000px;
+      --muted: rgba(0,0,0,0.6);
+      --line: rgba(0,0,0,0.18);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
+      min-width: 0;
     }
 
     body {
@@ -33,7 +27,6 @@
       color: var(--ink);
       background: var(--paper);
       overflow-x: hidden;
-      line-height: 1.45;
     }
 
     .site-video {
@@ -42,14 +35,6 @@
       z-index: -1;
       pointer-events: none;
       overflow: hidden;
-      background: var(--paper);
-    }
-
-    .site-video::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(245, 242, 233, 0.18);
     }
 
     .site-video video {
@@ -63,89 +48,60 @@
     }
 
     .page {
-      max-width: var(--page-width);
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 2.5rem 1.25rem 3rem;
+      padding: 2.5rem 2rem 3rem;
       display: grid;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
     .panel {
       background: var(--paper-soft);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
+      padding: 1.5rem;
+      border-radius: 22px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.35rem 1.35rem;
-      position: relative;
       overflow: hidden;
     }
 
-    /* optional edge fade only where supported */
-    @supports ((-webkit-mask-image: linear-gradient(black, black)) or (mask-image: linear-gradient(black, black))) {
-      .panel.edge-mask {
-        -webkit-mask-image:
-          linear-gradient(to right,
-            transparent 0,
-            rgba(0,0,0,0.9) 6px,
-            rgba(0,0,0,0.9) calc(100% - 6px),
-            transparent 100%),
-          linear-gradient(to bottom,
-            transparent 0,
-            rgba(0,0,0,0.9) 6px,
-            rgba(0,0,0,0.9) calc(100% - 6px),
-            transparent 100%);
-        -webkit-mask-composite: source-in;
-
-        mask-image:
-          linear-gradient(to right,
-            transparent 0,
-            rgba(0,0,0,0.9) 6px,
-            rgba(0,0,0,0.9) calc(100% - 6px),
-            transparent 100%),
-          linear-gradient(to bottom,
-            transparent 0,
-            rgba(0,0,0,0.9) 6px,
-            rgba(0,0,0,0.9) calc(100% - 6px),
-            transparent 100%);
-        mask-composite: intersect;
-      }
-    }
-
     .top-panel {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 1rem;
     }
 
     .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
       gap: 1rem;
       font-size: 0.95rem;
       text-transform: uppercase;
     }
 
+    .top > * {
+      min-width: 0;
+    }
+
     .company {
       text-align: right;
-      max-width: 60%;
     }
 
     .company-name {
       font-weight: 700;
+      line-height: 1.2;
     }
 
     .company-sub {
       font-size: 0.8rem;
       color: var(--muted);
-      margin-top: 0.15rem;
     }
 
     .nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
+      gap: 0.8rem 1.5rem;
       font-size: 0.85rem;
       text-transform: uppercase;
     }
@@ -153,34 +109,15 @@
     .nav a {
       text-decoration: none;
       color: var(--ink);
-      position: relative;
-      padding-bottom: 0.1rem;
-    }
-
-    .nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -1px;
-      width: 100%;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
-    }
-
-    .nav a:hover::after,
-    .nav a:focus-visible::after {
-      transform: scaleX(1);
+      white-space: nowrap;
     }
 
     .center {
-      min-height: clamp(260px, 42vh, 380px);
+      text-align: center;
+      min-height: 320px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
     }
 
     .center-inner {
@@ -188,52 +125,51 @@
     }
 
     .name {
-      font-size: clamp(1.55rem, 4vw, 2.1rem);
+      font-size: 2rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       line-height: 1.15;
     }
 
     .title {
-      margin-top: 0.45rem;
-      font-size: clamp(1rem, 2.6vw, 1.2rem);
+      margin-top: 0.4rem;
+      font-size: 1.2rem;
       color: var(--muted);
     }
 
     .intro {
-      margin-top: 1.2rem;
+      margin-top: 1.5rem;
       font-size: 0.95rem;
       color: var(--muted);
-      max-width: 46ch;
-      margin-inline: auto;
     }
 
     .bottom-panel {
-      display: grid;
-      gap: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
     .info {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
     }
 
     .block h2 {
       font-size: 0.8rem;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
 
     .block p {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--muted);
     }
 
     .bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
       gap: 1rem;
       font-size: 0.85rem;
       text-transform: uppercase;
@@ -242,92 +178,139 @@
       padding-top: 1rem;
     }
 
-    .phone {
+    .bottom > * {
+      min-width: 0;
+    }
+
+    .bottom div:last-child,
+    .top div:first-child {
       white-space: nowrap;
     }
 
-    /* tablet: still similar to desktop */
-    @media (max-width: 780px) {
+    /* tablet */
+    @media (max-width: 700px) {
       .page {
-        padding: 1rem 0.85rem 1.5rem;
+        padding: 1rem 0.8rem 1.2rem;
         gap: 0.9rem;
       }
 
       .panel {
-        padding: 1rem;
-        border-radius: 18px;
+        padding: 0.95rem;
+        border-radius: 16px;
       }
 
-      .info {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .block:last-child {
-        grid-column: 1 / -1;
-      }
-    }
-
-    /* phone: keep visual hierarchy close to desktop */
-    @media (max-width: 560px) {
       .top {
-        align-items: flex-start;
-        gap: 0.8rem;
+        font-size: 0.78rem;
+        gap: 0.65rem;
       }
 
-      .company {
-        max-width: none;
+      .company-sub {
+        font-size: 0.72rem;
       }
 
       .nav {
-        justify-content: space-between;
-        gap: 0.65rem 1rem;
-      }
-
-      .nav a {
-        font-size: 0.82rem;
+        gap: 0.5rem 1rem;
+        font-size: 0.76rem;
       }
 
       .center {
         min-height: 220px;
       }
 
-      .info {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+      .name {
+        font-size: 1.35rem;
+        letter-spacing: 0.03em;
       }
 
-      .block:last-child {
-        grid-column: auto;
+      .title {
+        font-size: 0.95rem;
+      }
+
+      .intro {
+        margin-top: 1rem;
+        font-size: 0.84rem;
+      }
+
+      .info {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+      }
+
+      .block h2 {
+        font-size: 0.72rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .block p {
+        font-size: 0.76rem;
+        line-height: 1.35;
       }
 
       .bottom {
-        flex-direction: column;
-        gap: 0.35rem;
+        grid-template-columns: 1fr auto;
+        font-size: 0.72rem;
+        gap: 0.65rem;
       }
     }
 
-    /* motion / mobile performance */
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
+    /* very narrow phones: still keep desktop structure, just shrink harder */
+    @media (max-width: 430px) {
+      .top {
+        font-size: 0.68rem;
       }
 
+      .company-name {
+        font-size: 0.82rem;
+      }
+
+      .company-sub {
+        font-size: 0.64rem;
+      }
+
+      .nav {
+        font-size: 0.68rem;
+        gap: 0.35rem 0.8rem;
+      }
+
+      .name {
+        font-size: 1.12rem;
+      }
+
+      .title {
+        font-size: 0.82rem;
+      }
+
+      .intro {
+        font-size: 0.75rem;
+      }
+
+      .info {
+        gap: 0.55rem;
+      }
+
+      .block h2 {
+        font-size: 0.64rem;
+      }
+
+      .block p {
+        font-size: 0.68rem;
+      }
+
+      .bottom {
+        font-size: 0.63rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
       .site-video video {
         transform: none !important;
-      }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
-      .site-video video {
-        top: 0;
-        height: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="site-video" aria-hidden="true">
+  <div class="site-video">
     <video autoplay muted loop playsinline poster="smallpraxis.jpg">
       <source src="smallpraxis.mp4" type="video/mp4">
     </video>
@@ -335,16 +318,16 @@
 
   <main class="page">
 
-    <section class="panel edge-mask top-panel">
+    <section class="panel top-panel">
       <header class="top">
-        <div class="phone">+43 123 456 789</div>
+        <div>+43 123 456 789</div>
         <div class="company">
           <div class="company-name">Praxis Dr. Mustermann</div>
           <div class="company-sub">Allgemeinmedizin</div>
         </div>
       </header>
 
-      <nav class="nav" aria-label="Hauptnavigation">
+      <nav class="nav">
         <a href="#">Praxis</a>
         <a href="#">Leistungen</a>
         <a href="#">Kontakt</a>
@@ -352,7 +335,7 @@
       </nav>
     </section>
 
-    <section class="panel edge-mask center">
+    <section class="panel center">
       <div class="center-inner">
         <h1 class="name">Dr. Max Mustermann</h1>
         <div class="title">Facharzt für Allgemeinmedizin</div>
@@ -363,7 +346,7 @@
       </div>
     </section>
 
-    <section class="panel edge-mask bottom-panel">
+    <section class="panel bottom-panel">
       <div class="info">
         <div class="block">
           <h2>Leistungen</h2>
@@ -383,7 +366,7 @@
 
       <footer class="bottom">
         <div>Musterstraße 1, 2230 Deutsch-Wagram</div>
-        <div class="phone">Tel +43 123 456 789</div>
+        <div>Tel +43 123 456 789</div>
       </footer>
     </section>
 
@@ -391,17 +374,15 @@
 
   <script>
     const video = document.querySelector('.site-video video');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isCoarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarse = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
     function updateParallax() {
-      if (!video || prefersReducedMotion || isCoarsePointer) return;
-      const scrollY = window.scrollY;
-      const speed = 0.22;
-      video.style.transform = `translateY(${scrollY * speed}px)`;
+      if (!video || reduceMotion || coarse) return;
+      video.style.transform = `translateY(${window.scrollY * 0.22}px)`;
     }
 
-    if (video && !prefersReducedMotion && !isCoarsePointer) {
+    if (!reduceMotion && !coarse) {
       window.addEventListener('scroll', updateParallax, { passive: true });
       window.addEventListener('load', updateParallax);
     }
