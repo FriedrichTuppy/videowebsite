@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html>
-<body style="margin:0; background:black; display:flex; justify-content:center; align-items:center; height:100vh;">
+<html lang="en">
+<body style="margin:0; background:black;">
 
-  <video controls style="max-width:90vw; max-height:90vh;">
+  <video id="bgvid"
+         autoplay
+         muted
+         playsinline
+         style="
+           position: fixed;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           max-width: 100vw;
+           max-height: 100vh;
+           pointer-events: none;
+           object-fit: contain;
+         ">
     <source src="fourier_name.mp4" type="video/mp4">
   </video>
+
+  <script>
+    const v = document.getElementById("bgvid");
+
+    v.addEventListener("ended", () => {
+      v.pause();
+      v.currentTime = v.duration;
+    });
+  </script>
 
 </body>
 </html>
